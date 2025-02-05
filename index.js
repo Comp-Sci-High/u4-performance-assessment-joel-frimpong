@@ -1,14 +1,17 @@
+//https://chatgpt.com/share/67a03fe4-1010-8008-8b53-64cfcc0bbf63
+
 const express = require('express')
 const app = express()
 
-const recipePosts = [
+const recipePosts = {
+  recipePosts: [
     {
       username: "FoodieGal21",
       dishName: "Spicy Garlic Shrimp Pasta",
       ingredients: "Shrimp, Garlic, Pasta, Olive Oil, Red Pepper Flakes, Parmesan Cheese, Parsley",
       description: "A bold and savory shrimp pasta packed with garlic and a spicy kick, perfect for dinner.",
       price: 15.99,
-      image: "images/spicy-garlic-shrimp.jpg",
+      image: "https://christieathome.com/wp-content/uploads/2022/05/Chili-Garlic-Shrimp-Noodles-4.jpg",
       inStock: true
     },
     {
@@ -17,16 +20,16 @@ const recipePosts = [
       ingredients: "Quinoa, Chickpeas, Sweet Potato, Kale, Avocado, Tahini Dressing",
       description: "A hearty and colorful bowl loaded with healthy, plant-based ingredients.",
       price: 12.50,
-      image: "images/vegan-buddha-bowl.jpg",
+      image: "https://www.sunglowkitchen.com/wp-content/uploads/2023/03/tofu-buddha-bowls-peanut-sauce-8-1.jpg",
       inStock: true
     },
     {
       username: "SavorySue",
-      dishName: "Classic Beef Wellington",
-      ingredients: "Beef Tenderloin, Puff Pastry, Mushrooms, Prosciutto, Dijon Mustard",
-      description: "A gourmet British dish with perfectly cooked beef wrapped in flaky puff pastry.",
-      price: 32.99,
-      image: "images/beef-wellington.jpg",
+      dishName: "Bacon Egg & Cheese",
+      ingredients: "Bread, Bacon, Egg & Cheese",
+      description: "A good and quick breakfast to eat on the road",
+      price: 5.99,
+      image: "https://www.allrecipes.com/thmb/pmsRHoZskCWXBLs6P0V1j91IAgo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/8739440_NYDeli-Bacon-Egg-and-Cheese-Sandwich_Roscoe-Hall_4x3-b8049392302d4a76a0190d9e85411876.jpg",
       inStock: false
     },
     {
@@ -35,20 +38,21 @@ const recipePosts = [
       ingredients: "Kale, Quinoa, Cherry Tomatoes, Feta Cheese, Lemon Vinaigrette",
       description: "A refreshing and nutrient-packed salad topped with tangy feta cheese.",
       price: 10.00,
-      image: "images/kale-quinoa-salad.jpg",
+      image: "https://www.eatingwell.com/thmb/H8ldmJ7nz2tNtBsYHNYLTpGbRKc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/kale-and-quinoa-salad-with-lemon-dressing-50e7ff379b924df8ab3dd665e2efefb5.jpg",
       inStock: true
     },
     {
-      username: "SweetToothJen",
-      dishName: "Chocolate Lava Cake",
-      ingredients: "Dark Chocolate, Butter, Eggs, Sugar, Flour",
-      description: "A decadent dessert with a gooey molten chocolate center.",
-      price: 8.00,
-      images: "images/chocolate-lava-cake.jpg",
-      inStock: false
-  } 
+      username: "LeBron James",
+      dishName: "Chicken Alfredo",
+      ingredients: "Chicken, Pasta, Alfredo Sauce, Salt & Pepper & Seasoning of choice",
+      description: "A refreshing and nutrient-packed salad topped with tangy feta cheese.",
+      price: 15.99,
+      image: "https://sugarspunrun.com/wp-content/uploads/2024/02/Chicken-alfredo-recipe-1-of-1.jpg",
+      inStock: true
+    },
+ 
 ]
-
+}
 app.set("view engine", "ejs")
 
 app.use((req, res, next) => {
@@ -56,4 +60,18 @@ app.use((req, res, next) => {
     next()
   })
 
-  
+app.use(express.static(__dirname + "/public"))
+
+app.get("/all", (req, res)=>{
+  res.render("overview.ejs", recipePosts)
+})
+
+app.get("/post/:id", (req,res) => {
+  const park = req.params.id;
+  res.render("detailed.ejs", recipePosts.recipePosts[park])
+})
+
+
+app.listen(3000, () => {
+  console.log("Server running")
+})
