@@ -37,7 +37,7 @@ const recipePosts = {
       dishName: "Kale and Quinoa Salad",
       ingredients: "Kale, Quinoa, Cherry Tomatoes, Feta Cheese, Lemon Vinaigrette",
       description: "A refreshing and nutrient-packed salad topped with tangy feta cheese.",
-      price: 10.00,
+      price: 12.99,
       image: "https://www.eatingwell.com/thmb/H8ldmJ7nz2tNtBsYHNYLTpGbRKc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/kale-and-quinoa-salad-with-lemon-dressing-50e7ff379b924df8ab3dd665e2efefb5.jpg",
       inStock: true
     },
@@ -62,6 +62,10 @@ app.use((req, res, next) => {
 
 app.use(express.static(__dirname + "/public"))
 
+app.get("/", (req, res)=>{
+  res.sendFile(__dirname + "/public/index.html")
+})
+
 app.get("/all", (req, res)=>{
   res.render("overview.ejs", recipePosts)
 })
@@ -74,4 +78,8 @@ app.get("/post/:id", (req,res) => {
 
 app.listen(3000, () => {
   console.log("Server running")
+})
+
+app.use((request, response, next) =>{
+  response.status(404).send("404 NOT FOUND")
 })

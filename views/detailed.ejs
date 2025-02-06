@@ -1,7 +1,14 @@
-<!--https://chatgpt.com/share/67a043e9-fa50-8008-a07e-4304cc0fc2cd -->
+<!--https://chatgpt.com/share/67a500a5-e4cc-8008-84a1-8675658fd029-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/all">All Recipes</a></li>
+        </ul>
+      </nav>
+      
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Details</title>
@@ -11,7 +18,7 @@
     <div class="recipe-container">
         <h1 id="recipe-name">Recipe Name</h1>
         <p class="recipe-name">Recipe-name: <span id="recipe-name"><%=dishName %></span></p>
-        <p class="username">By: <span id="username"><%=username %> </span></p>
+        <p class="username">Username: <span id="username"><%=username %> </span></p>
         <img id="dish-image" src="<%=image %>" alt="Dish Image">
         <p class="price">Price: <span id="price"><%=price %></span></p>
         <p class="description">Description: <span id="description"><%=description %></span></p>
